@@ -156,7 +156,7 @@ public class A_EntityLifeCycleTests {
     @Test
     public void 삭제_remove_테스트(){
         /*
-        * remove : 엔티티를 영속성 컨텍스트 및 데이터베이스에서 삭제한다
+        * remove : 엔티티를 영속성 컨텍스트 안에서 값만 삭제한다
         * 단 , 트랜잭션을 제어하지 않으면 영구 반영되지는 않는다.
         * 트랜잭션을 커밋하는 순간 영속성 컨텍스트에서 관리하는 엔티티 객체가 데이터베이스에 반영되개 한다 (이를 flush)
         * Flush:영속성 컨텍스트의 변경 내용을 데이터베이스에 동기화하는 작업(등록, 수정, 삭제한 엔티티를 데이터베이스에 반영)
@@ -166,7 +166,7 @@ public class A_EntityLifeCycleTests {
         Menu foundMenu = entityManager.find(Menu.class, 2);
 
         //when
-        entityManager.remove(foundMenu);
+        entityManager.remove(foundMenu);  // remove하면 null값만 된다. 그렇기에 영속성컨텍스트에는 계속 남아있다.
         Menu refoundMenu = entityManager.find(Menu.class, 2);
 
         Assertions.assertEquals(2,foundMenu.getMenuCode());
