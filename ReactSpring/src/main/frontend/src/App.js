@@ -5,10 +5,18 @@ function App() {
   const [hello, setHello] = useState('')
 
   useEffect(() => {
-    axios.get('/api/hello')
-        .then(response => setHello(response.data))
-        .catch(error => console.log(error))
+    // axios.get('/api/hello')
+    //     .then(response => setHello(response.data))
+    //     .catch(error => console.log(error))
+     fetchData();
+
   }, []);
+
+  const fetchData = async () => {
+          const response = await fetch('/hello');
+          const jsonData = await response.json();
+          setHello(jsonData);
+      };
 
   return (
       <div>
